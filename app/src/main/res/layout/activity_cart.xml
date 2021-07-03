@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_layout_cart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".HomeActivity">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.NuiBookstore">
+            <include
+                layout="@layout/toolbar_main"
+                android:id="@+id/toolbar_main_cart"
+                app:layout_scrollFlags="scroll|enterAlways"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recycler_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:scrollbars="vertical" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/total_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_price"
+                android:textColor="@color/purple_200"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/total_price_title"/>
+        <Button
+            android:id="@+id/order_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/order_button"
+            android:layout_below="@id/total_price_title"
+            android:background="@drawable/gradient_background"
+            android:textAllCaps="false"/>
+        <Button
+            android:id="@+id/order_information_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/order_information_button"
+            android:layout_below="@id/order_button"
+            android:background="@drawable/gradient_background"
+            android:textAllCaps="false"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

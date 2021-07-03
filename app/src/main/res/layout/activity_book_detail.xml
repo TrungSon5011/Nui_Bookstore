@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".BookDetailActivity">
+        <include
+            android:id="@+id/toolbar_book_detail"
+            layout="@layout/toolbar_main" />
+
+        <ImageView
+            android:id="@+id/book_detail_image"
+            android:layout_width="236dp"
+            android:layout_height="357dp"
+            android:layout_below="@+id/toolbar_book_detail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+        <Button
+            android:id="@+id/add_to_cart_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_below="@id/book_detail_image"
+            android:text="@string/button"
+            android:onClick="addToCart"
+            android:background="@drawable/gradient_background"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/book_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:layout_below="@+id/add_to_cart_button"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/detail_book_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/book_name"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:layout_below="@+id/add_to_cart_button"
+            />
+
+        <TextView
+            android:id="@+id/book_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_book_name"
+            android:text="@string/author"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/detail_book_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/book_author"
+            android:layout_below="@id/detail_book_name"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:layout_below="@+id/book_author"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/detail_book_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_book_author"
+            android:layout_toRightOf="@+id/price"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:layout_below="@+id/price"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/detail_book_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/description"
+            android:layout_below="@+id/detail_book_price"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>
+

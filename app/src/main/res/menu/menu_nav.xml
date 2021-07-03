@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/novel"
+            android:title="@string/novel"/>
+        <item
+            android:id="@+id/history"
+            android:title="@string/history"/>
+        <item
+            android:id="@+id/politics"
+            android:title="@string/politics"/>
+        <item
+            android:id="@+id/children"
+            android:title="@string/children"/>
+        <item
+            android:id="@+id/science"
+            android:title="@string/science"/>
+        <item
+            android:id="@+id/logout"
+            android:title="Logout"/>
+    </group>
+
+</menu>

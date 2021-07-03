@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "216793686781",
+    "firebase_url": "https://nui-bookstore-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nui-bookstore",
+    "storage_bucket": "nui-bookstore.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216793686781:android:aa8f1cbe24969226791494",
+        "android_client_info": {
+          "package_name": "com.nui.nuibookstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216793686781-tdbqb12n2vgc75j262qme954je41ngu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nui.nuibookstore",
+            "certificate_hash": "75fc6cef6d26a9de311d2f369984bd53c43307f4"
+          }
+        },
+        {
+          "client_id": "216793686781-mhj2ecidkf2bvabht9gktd8r51t9e9tt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXKpGYk2Hu2MCsPFrQ-1vtTIx8M7-K4cQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216793686781-mhj2ecidkf2bvabht9gktd8r51t9e9tt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,10 +20,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nui.nuibookstore.common.ReplaceString;
+import com.nui.nuibookstore.model.Book;
 import com.nui.nuibookstore.model.User;
 import com.nui.nuibookstore.prevalent.Prevalent;
 import com.nui.nuibookstore.service.DeleteBook;
 import com.nui.nuibookstore.service.InsertAllBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.paperdb.Paper;
 
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Button joinNowButton;
     private Button loginButton;
     private ProgressDialog loadingBar;
+    private Context context = this;
 
 
 
@@ -49,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
 
-//                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-//                startActivity(intent);
             }
         });
         joinNowButton.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +81,32 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-//        new DeleteBook(this).execute();
 
-//        InsertAllBook insertAllBook = new InsertAllBook(this);
-//        insertAllBook.execute();
+        List<Book> bookList = getAllBookFromFirebase();
 
+    }
+    private List<Book> getAllBookFromFirebase(){
+        List<Book> bookList = new ArrayList<>();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.child("Books").getChildren()){
+                    Book book = dataSnapshot.getValue(Book.class);
+                    Log.i("BookFirebase",book.toString());
+                    bookList.add(book);
+                    InsertAllBook insertAllBook = new InsertAllBook(context, bookList);
+
+                    insertAllBook.execute();
+                }
+            }
+
+            @Override
+            public void onCancelled( DatabaseError error) {
+
+            }
+        });
+        return bookList;
     }
 
     private void allowAccess(String email, String password) {

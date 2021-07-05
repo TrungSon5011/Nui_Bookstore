@@ -9,9 +9,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Book implements Comparable<Book>, Serializable {
+public class Book implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private Long id;
     @ColumnInfo(name = "book_name")
     private String name;
     @ColumnInfo(name = "author")
@@ -22,36 +22,37 @@ public class Book implements Comparable<Book>, Serializable {
     private String genre;
     @ColumnInfo(name = "price")
     private Double price;
-    @ColumnInfo(name = "picture")
-    private int pictureResourceId;
+    @ColumnInfo(name = "image_url")
+    private String imageUrl;
 
     public Book() {
     }
 
-    public Book(String name, String author, String description, String genre, Double price, int pictureResourceId) {
+
+    public Book(String name, String author, String description, String genre, Double price, String imageUrl) {
         this.name = name;
         this.author = author;
         this.description = description;
         this.genre = genre;
         this.price = price;
-        this.pictureResourceId = pictureResourceId;
+        this.imageUrl = imageUrl;
     }
 
-    public Book(int id, String name, String author, String description, String genre, Double price, int pictureResourceId) {
+    public Book(Long id, String name, String author, String description, String genre, Double price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.description = description;
         this.genre = genre;
         this.price = price;
-        this.pictureResourceId = pictureResourceId;
+        this.imageUrl = imageUrl;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,20 +87,21 @@ public class Book implements Comparable<Book>, Serializable {
         this.price = price;
     }
 
-    public int getPictureResourceId() {
-        return pictureResourceId;
-    }
-
-    public void setPictureResourceId(int pictureResourceId) {
-        this.pictureResourceId = pictureResourceId;
-    }
-
     public String getGenre() {
         return genre;
     }
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+//        return "1984.png";
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -111,34 +113,7 @@ public class Book implements Comparable<Book>, Serializable {
                 ", description='" + description + '\'' +
                 ", genre='" + genre + '\'' +
                 ", price=" + price +
-                ", pictureResourceId=" + pictureResourceId +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return id == book.id &&
-                pictureResourceId == book.pictureResourceId &&
-                Objects.equals(name, book.name) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(description, book.description) &&
-                Objects.equals(genre, book.genre) &&
-                Objects.equals(price, book.price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, author, description, genre, price, pictureResourceId);
-    }
-
-    @Override
-    public int compareTo(Book o) {
-        if (this.name != o.getName()){
-            return -1;
-        }
-        return 0;
     }
 }

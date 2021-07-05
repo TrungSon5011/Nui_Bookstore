@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.nui.nuibookstore.model.Book;
 import com.nui.nuibookstore.model.BookCart;
 import com.nui.nuibookstore.service.FindByName;
@@ -57,7 +60,11 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView name = (TextView) findViewById(R.id.detail_book_name);
         name.setText(book.getName());
         ImageView imageView = (ImageView) findViewById(R.id.book_detail_image);
-        imageView.setImageResource(book.getPictureResourceId());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(book.getImageUrl());
+        Glide.with(this)
+                .load(storageReference)
+                .into(imageView);
+//        imageView.setImageResource(book.getPictureResourceId());
         imageView.setContentDescription(book.getName());
         TextView author = (TextView) findViewById(R.id.detail_book_author);
         author.setText(book.getAuthor());

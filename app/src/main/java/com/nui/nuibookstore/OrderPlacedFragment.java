@@ -80,7 +80,6 @@ public class OrderPlacedFragment extends Fragment {
                             new String[]{"date","totalPrice"},
                             new int[]{R.id.date_list_view,R.id.total_price_list_view}
                     );
-//                    abc
                     listView.setAdapter(listAdapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

@@ -14,13 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderInformationDetailActivity"
-            android:parentActivityName=".OrderInformationActivity">
-        </activity>
+        <activity
+            android:name=".OrderInformationDetailActivity"
+            android:parentActivityName=".OrderInformationActivity"></activity>
         <activity
             android:name=".OrderInformationActivity"
-            android:parentActivityName=".CartActivity">
-        </activity>
+            android:parentActivityName=".CartActivity"></activity>
         <activity
             android:name=".OrderActivity"
             android:parentActivityName=".CartActivity" />

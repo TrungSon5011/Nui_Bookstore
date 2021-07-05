@@ -126,7 +126,7 @@ public class OrderActivity extends AppCompatActivity {
 
             }
         });
-        Intent intent = new Intent(OrderActivity.this,OrderInformationActivity.class);
+        Intent intent = new Intent(OrderActivity.this,CartActivity.class);
         startActivity(intent);
 
     }

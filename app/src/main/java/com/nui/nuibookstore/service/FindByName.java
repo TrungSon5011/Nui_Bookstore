@@ -55,7 +55,7 @@ public class FindByName extends AsyncTask<Void,Void, List<Book>> {
 //                authors[i] = bookList.get(i).getAuthor();
 //                price[i] = bookList.get(i).getPrice();
 //            }
-            CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList);
+            CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList,searchResultActivity);
             recyclerView.setAdapter(captionedImagesAdapter);
             StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);

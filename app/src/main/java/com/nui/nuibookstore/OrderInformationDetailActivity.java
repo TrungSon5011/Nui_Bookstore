@@ -38,7 +38,7 @@ public class OrderInformationDetailActivity extends AppCompatActivity {
         cityTextView.setText(orderInformation.getCity());
         stateTextView.setText(R.string.processing_tab);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.order_recycler);
-        CaptionBookOrderAdapter captionBookOrderAdapter = new CaptionBookOrderAdapter(orderInformation.getBookCarts());
+        CaptionBookOrderAdapter captionBookOrderAdapter = new CaptionBookOrderAdapter(orderInformation.getBookCarts(),this);
         recyclerView.setAdapter(captionBookOrderAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

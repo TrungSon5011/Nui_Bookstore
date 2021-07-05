@@ -43,17 +43,7 @@ public class GetBooksByGenre extends AsyncTask<Void,Void,List<Book>> {
     protected void onPostExecute(List<Book> bookList){
         RecyclerView recyclerView = (RecyclerView) navigationItemActivity.findViewById(R.id.result_navigation_recycler);
         getBooksByGenre = bookList;
-//        int [] imageResourceIds = new int[bookList.size()];
-//        String [] names = new String[bookList.size()];
-//        String [] authors = new String[bookList.size()];
-//        double [] price = new double[bookList.size()];
-//        for (int i = 0; i < bookList.size() ; i++) {
-//            imageResourceIds[i] = bookList.get(i).getPictureResourceId();
-//            names[i] = bookList.get(i).getName();
-//            authors[i] = bookList.get(i).getAuthor();
-//            price[i] = bookList.get(i).getPrice();
-//        }
-        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList);
+        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList,navigationItemActivity);
         recyclerView.setAdapter(captionedImagesAdapter);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);

@@ -44,17 +44,7 @@ public class GetAllBook extends AsyncTask<Void,Void,List<Book>> {
         RecyclerView recyclerView = (RecyclerView) homeActivity.findViewById(R.id.home_recycler);
         List<Book> bookList = books;
         getAllBook = books;
-//        int [] imageResourceIds = new int [bookList.size()];
-//        String [] names = new String[bookList.size()];
-//        String [] authors = new String[bookList.size()];
-//        double [] price = new double[bookList.size()];
-//        for (int i = 0; i < bookList.size() ; i++) {
-//            imageResourceIds[i] = bookList.get(i).getPictureResourceId();
-//            names[i] = bookList.get(i).getName();
-//            authors[i] = bookList.get(i).getAuthor();
-//            price[i] = bookList.get(i).getPrice();
-//        }
-        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(books);
+        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(books,homeActivity);
         recyclerView.setAdapter(captionedImagesAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homeActivity);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);

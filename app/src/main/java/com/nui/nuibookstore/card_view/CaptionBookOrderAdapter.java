@@ -1,5 +1,6 @@
 package com.nui.nuibookstore.card_view;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.nui.nuibookstore.R;
 import com.nui.nuibookstore.model.BookCart;
 
@@ -19,8 +23,14 @@ import java.util.List;
 
 public class CaptionBookOrderAdapter extends RecyclerView.Adapter<CaptionBookOrderAdapter.ViewHolder> {
     private List<BookCart> bookCartList;
+    private Activity activity;
     public CaptionBookOrderAdapter(List<BookCart> bookCartList) {
         this.bookCartList = bookCartList;
+    }
+
+    public CaptionBookOrderAdapter(List<BookCart> bookCartList, Activity activity){
+        this.bookCartList = bookCartList;
+        this.activity = activity;
     }
 
     @NonNull
@@ -54,8 +64,12 @@ public class CaptionBookOrderAdapter extends RecyclerView.Adapter<CaptionBookOrd
             TextView  nameTextView = (TextView) cardView.findViewById(R.id.name);
             TextView authorTextView = (TextView) cardView.findViewById(R.id.author);
             TextView priceQuantityTextView = (TextView) cardView.findViewById(R.id.price_quantity);
-            Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookCart.getBook().getPictureResourceId());
-            imageView.setImageDrawable(drawable);
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(bookCart.getBook().getImageUrl());
+            Glide.with(activity)
+                    .load(storageReference)
+                    .into(imageView);
+//            Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookCart.getBook().getPictureResourceId());
+//            imageView.setImageDrawable(drawable);
             nameTextView.setText(bookCart.getBook().getName());
             authorTextView.setText(bookCart.getBook().getAuthor());
             priceQuantityTextView.setText("$"+bookCart.getBook().getPrice()+" x "+bookCart.getQuantity());

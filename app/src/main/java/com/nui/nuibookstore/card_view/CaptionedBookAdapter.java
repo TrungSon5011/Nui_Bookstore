@@ -18,6 +18,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.nui.nuibookstore.BookDetailActivity;
 import com.nui.nuibookstore.CartActivity;
 import com.nui.nuibookstore.R;
@@ -40,6 +43,7 @@ public class CaptionedBookAdapter  extends RecyclerView.Adapter<CaptionedBookAda
         this.cartActivity = cartActivity;
         this.bookCartList = bookCartList;
     }
+
     public void setListener(Listener listener){
         this.listener = listener;
     }
@@ -65,8 +69,12 @@ public class CaptionedBookAdapter  extends RecyclerView.Adapter<CaptionedBookAda
     public void onBindViewHolder(@NonNull CaptionedBookAdapter.ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
         ImageView imageView = (ImageView) cardView.findViewById(R.id.book_image_cart);
-        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookCartList.get(position).getBook().getPictureResourceId());
-        imageView.setImageDrawable(drawable);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(bookCartList.get(position).getBook().getImageUrl());
+        Glide.with(cartActivity)
+                .load(storageReference)
+                .into(imageView);
+//        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookCartList.get(position).getBook().getPictureResourceId());
+//        imageView.setImageDrawable(drawable);
         imageView.setContentDescription(bookCartList.get(position).getBook().getName());
         TextView textViewName = (TextView) cardView.findViewById(R.id.book_name_cart);
         textViewName.setText(bookCartList.get(position).getBook().getName());

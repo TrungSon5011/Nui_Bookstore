@@ -1,5 +1,6 @@
 package com.nui.nuibookstore.card_view;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.nui.nuibookstore.R;
 import com.nui.nuibookstore.model.Book;
 
@@ -21,11 +25,17 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
 
     private List<Book> bookList;
     private Listener listener;
+    private Activity activity;
     public interface Listener{
         void onClick(int position);
     }
     public CaptionedImagesAdapter(List<Book> bookList){
         this.bookList = bookList;
+    }
+    public CaptionedImagesAdapter (List<Book> bookList, Activity activity){
+        this.bookList = bookList;
+        this.activity = activity;
+
     }
     public void setListener(Listener listener){
         this.listener = listener;
@@ -60,9 +70,13 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
     }
     private void addToCardView(CardView cardView, int position){
         ImageView imageView = (ImageView) cardView.findViewById(R.id.book_image);
-        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookList.get(position).getPictureResourceId());
-        imageView.setImageDrawable(drawable);
-        imageView.setContentDescription(bookList.get(position).getName());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(bookList.get(position).getImageUrl());
+        Glide.with(activity)
+                .load(storageReference)
+                .into(imageView);
+//        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookList.get(position).getPictureResourceId());
+//        imageView.setImageDrawable(drawable);
+//        imageView.setContentDescription(bookList.get(position).getName());
         TextView textViewName = (TextView) cardView.findViewById(R.id.book_name);
         textViewName.setText(bookList.get(position).getName());
         TextView textViewAuthor = (TextView) cardView.findViewById(R.id.book_author);

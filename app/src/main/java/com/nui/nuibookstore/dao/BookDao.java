@@ -3,6 +3,7 @@ package com.nui.nuibookstore.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public interface BookDao {
     @Query("SELECT * FROM book")
     List<Book> getAll();
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insertBook(Book book);
     @Query("SELECT * FROM book WHERE book_name like :name")
     List<Book> findByName(String name);

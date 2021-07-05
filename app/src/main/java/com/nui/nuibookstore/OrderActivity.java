@@ -22,15 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nui.nuibookstore.common.ReplaceString;
-import com.nui.nuibookstore.model.OrderInformation;
-import com.nui.nuibookstore.model.User;
 import com.nui.nuibookstore.prevalent.Prevalent;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -52,20 +48,24 @@ public class OrderActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         nameEditText = (EditText) findViewById(R.id.name_edit_text);
+        nameEditText.setText("Son");
         phoneEditText = (EditText) findViewById(R.id.phone_edit_text);
+        phoneEditText.setText("007");
         homeAddressEditText = (EditText) findViewById(R.id.home_address_edit_text);
+        homeAddressEditText.setText("Huong Tra");
         cityEditText = (EditText) findViewById(R.id.city_edit_text);
+        cityEditText.setText("Hue");
         confirmButton = (Button) findViewById(R.id.confirm_order_button);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                check();
+                checkFormOrder();
             }
         });
-
+        
     }
 
-    private void check() {
+    private void checkFormOrder() {
         if (TextUtils.isEmpty(nameEditText.getText().toString())){
             Toast.makeText(this,"Please provide your full name",Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(phoneEditText.getText().toString())){
@@ -126,8 +126,8 @@ public class OrderActivity extends AppCompatActivity {
 
             }
         });
-        Intent intent = new Intent(OrderActivity.this,CartActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(OrderActivity.this,HomeActivity.class);
+//        startActivity(intent);
 
     }
 }

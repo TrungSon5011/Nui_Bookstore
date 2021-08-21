@@ -19,47 +19,46 @@ import com.nui.nuibookstore.model.Book;
 
 import java.util.List;
 
-public class GetAllBook extends AsyncTask<Void,Void,List<Book>> {
+public class GetAllBook extends AsyncTask<Void, Void, List<Book>> {
 
     private Context context;
-    private HomeActivity homeActivity ;
+    private HomeActivity homeActivity;
     public static List<Book> getAllBook;
-    public GetAllBook(HomeActivity homeActivity){
+
+    public GetAllBook(HomeActivity homeActivity) {
 
         this.homeActivity = homeActivity;
     }
 
     @Override
-    protected void onPreExecute(){
-        Toast.makeText(homeActivity.getContextToDB(),"Please wait...",Toast.LENGTH_SHORT).show();
+    protected void onPreExecute() {
+        Toast.makeText(homeActivity.getContextToDB(), "Please wait...", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     protected List<Book> doInBackground(Void... voids) {
         AppDatabase database = AppDatabase.getAppDatabase(homeActivity.getContextToDB());
         BookDao bookDao = database.bookDao();
         return bookDao.getAll();
     }
+
     @Override
-    protected void onPostExecute(List<Book> books){
+    protected void onPostExecute(List<Book> books) {
         RecyclerView recyclerView = (RecyclerView) homeActivity.findViewById(R.id.home_recycler);
         List<Book> bookList = books;
         getAllBook = books;
-        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(books,homeActivity);
+        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(books, homeActivity);
         recyclerView.setAdapter(captionedImagesAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homeActivity);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         captionedImagesAdapter.setListener(new CaptionedImagesAdapter.Listener() {
             @Override
             public void onClick(int position) {
                 Intent intent = new Intent(homeActivity, BookDetailActivity.class);
-                intent.putExtra(BookDetailActivity.BOOK_POSITION,position);
-                intent.putExtra(BookDetailActivity.CHECK,1);
+                intent.putExtra(BookDetailActivity.BOOK_POSITION, position);
+                intent.putExtra(BookDetailActivity.CHECK, 1);
                 homeActivity.startActivity(intent);
             }
         });
-
-
-
     }
 }

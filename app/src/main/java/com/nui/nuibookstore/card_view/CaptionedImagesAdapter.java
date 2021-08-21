@@ -26,18 +26,22 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
     private List<Book> bookList;
     private Listener listener;
     private Activity activity;
-    public interface Listener{
+
+    public interface Listener {
         void onClick(int position);
     }
-    public CaptionedImagesAdapter(List<Book> bookList){
+
+    public CaptionedImagesAdapter(List<Book> bookList) {
         this.bookList = bookList;
     }
-    public CaptionedImagesAdapter (List<Book> bookList, Activity activity){
+
+    public CaptionedImagesAdapter(List<Book> bookList, Activity activity) {
         this.bookList = bookList;
         this.activity = activity;
 
     }
-    public void setListener(Listener listener){
+
+    public void setListener(Listener listener) {
         this.listener = listener;
     }
 
@@ -54,29 +58,27 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
     @NonNull
     @Override
     public CaptionedImagesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_captioned_image,parent,false);
+        CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_captioned_image, parent, false);
         return new ViewHolder(cardView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CaptionedImagesAdapter.ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        addToCardView(cardView,position);
+        addToCardView(cardView, position);
     }
 
     @Override
     public int getItemCount() {
         return bookList.size();
     }
-    private void addToCardView(CardView cardView, int position){
+
+    private void addToCardView(CardView cardView, int position) {
         ImageView imageView = (ImageView) cardView.findViewById(R.id.book_image);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(bookList.get(position).getImageUrl());
         Glide.with(activity)
                 .load(storageReference)
                 .into(imageView);
-//        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookList.get(position).getPictureResourceId());
-//        imageView.setImageDrawable(drawable);
-//        imageView.setContentDescription(bookList.get(position).getName());
         TextView textViewName = (TextView) cardView.findViewById(R.id.book_name);
         textViewName.setText(bookList.get(position).getName());
         TextView textViewAuthor = (TextView) cardView.findViewById(R.id.book_author);
@@ -86,11 +88,10 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null){
+                if (listener != null) {
                     listener.onClick(position);
                 }
             }
         });
-
     }
 }

@@ -68,8 +68,6 @@ public class CaptionBookOrderAdapter extends RecyclerView.Adapter<CaptionBookOrd
             Glide.with(activity)
                     .load(storageReference)
                     .into(imageView);
-//            Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),bookCart.getBook().getPictureResourceId());
-//            imageView.setImageDrawable(drawable);
             nameTextView.setText(bookCart.getBook().getName());
             authorTextView.setText(bookCart.getBook().getAuthor());
             priceQuantityTextView.setText("$"+bookCart.getBook().getPrice()+" x "+bookCart.getQuantity());

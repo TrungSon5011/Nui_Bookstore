@@ -18,7 +18,7 @@ import com.nui.nuibookstore.model.Book;
 
 import java.util.List;
 
-public class GetBooksByGenre extends AsyncTask<Void,Void,List<Book>> {
+public class GetBooksByGenre extends AsyncTask<Void, Void, List<Book>> {
     private NavigationItemActivity navigationItemActivity;
     private String genre;
     public static List<Book> getBooksByGenre;
@@ -27,9 +27,10 @@ public class GetBooksByGenre extends AsyncTask<Void,Void,List<Book>> {
         this.navigationItemActivity = navigationItemActivity;
         this.genre = genre;
     }
+
     @Override
-    protected void onPreExecute(){
-        Toast.makeText(navigationItemActivity.getConText(),"Please wait...",Toast.LENGTH_SHORT).show();
+    protected void onPreExecute() {
+        Toast.makeText(navigationItemActivity.getConText(), "Please wait...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -39,23 +40,23 @@ public class GetBooksByGenre extends AsyncTask<Void,Void,List<Book>> {
         List<Book> bookList = bookDao.findByGenre(genre);
         return bookList;
     }
+
     @Override
-    protected void onPostExecute(List<Book> bookList){
+    protected void onPostExecute(List<Book> bookList) {
         RecyclerView recyclerView = (RecyclerView) navigationItemActivity.findViewById(R.id.result_navigation_recycler);
         getBooksByGenre = bookList;
-        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList,navigationItemActivity);
+        CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList, navigationItemActivity);
         recyclerView.setAdapter(captionedImagesAdapter);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         captionedImagesAdapter.setListener(new CaptionedImagesAdapter.Listener() {
             @Override
             public void onClick(int position) {
                 Intent intent = new Intent(navigationItemActivity, BookDetailActivity.class);
-                intent.putExtra(BookDetailActivity.BOOK_POSITION,position);
-                intent.putExtra(BookDetailActivity.CHECK,4);
+                intent.putExtra(BookDetailActivity.BOOK_POSITION, position);
+                intent.putExtra(BookDetailActivity.CHECK, 4);
                 navigationItemActivity.startActivity(intent);
             }
         });
     }
-
 }

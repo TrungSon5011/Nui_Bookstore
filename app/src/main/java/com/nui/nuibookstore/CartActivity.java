@@ -41,52 +41,49 @@ public class CartActivity extends AppCompatActivity {
 
         List<BookCart> bookCartList = BookDetailActivity.bookCartList;
         double totalPrice = 0.0;
-        for (int i = 0; i < bookCartList.size();i++){
-            totalPrice += bookCartList.get(i).getBook().getPrice()*bookCartList.get(i).getQuantity();
+        for (int i = 0; i < bookCartList.size(); i++) {
+            totalPrice += bookCartList.get(i).getBook().getPrice() * bookCartList.get(i).getQuantity();
         }
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.home_recycler_cart);
-        CaptionedBookAdapter captionedImagesAdapter = new CaptionedBookAdapter(this,bookCartList);
+        CaptionedBookAdapter captionedImagesAdapter = new CaptionedBookAdapter(this, bookCartList);
         recyclerView.setAdapter(captionedImagesAdapter);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-
         TextView totalPriceTextView = (TextView) findViewById(R.id.total_price);
-        totalPriceTextView.setText(""+ totalPrice+" $");
+        totalPriceTextView.setText("" + totalPrice + " $");
         Button orderButton = (Button) findViewById(R.id.order_button);
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bookCartList.isEmpty()){
-                    Toast.makeText(CartActivity.this,"Please choose the book to order",Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(CartActivity.this,OrderActivity.class);
+                if (bookCartList.isEmpty()) {
+                    Toast.makeText(CartActivity.this, "Please choose the book to order", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(CartActivity.this, OrderActivity.class);
                     startActivity(intent);
                 }
             }
         });
-
         captionedImagesAdapter.setListener(new CaptionedBookAdapter.Listener() {
             @Override
             public void onClick(int position) {
-                Intent intent = new Intent(getContext(),BookDetailActivity.class);
-                intent.putExtra(BookDetailActivity.BOOK_POSITION,position);
-                intent.putExtra(BookDetailActivity.CHECK,3);
+                Intent intent = new Intent(getContext(), BookDetailActivity.class);
+                intent.putExtra(BookDetailActivity.BOOK_POSITION, position);
+                intent.putExtra(BookDetailActivity.CHECK, 3);
                 startActivity(intent);
             }
         });
     }
+
     @Override
     public void onStop() {
-        if (CaptionedBookAdapter.dialogProcess != null){
+        if (CaptionedBookAdapter.dialogProcess != null) {
             CaptionedBookAdapter.dialogProcess.dismiss();
             CaptionedBookAdapter.dialogProcess = null;
         }
-
         super.onStop();
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return this;
     }
 

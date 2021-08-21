@@ -10,6 +10,7 @@ import com.nui.nuibookstore.service.GetBooksByGenre;
 
 public class NavigationItemActivity extends AppCompatActivity {
     public static final String GENRE_BOOK = "genreBook";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,12 +18,10 @@ public class NavigationItemActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_navigation_layout);
         setSupportActionBar(toolbar);
         String genre = getIntent().getExtras().getString(GENRE_BOOK);
-        new GetBooksByGenre(this,genre).execute();
-
-
+        new GetBooksByGenre(this, genre).execute();
     }
 
-    public Context getConText(){
+    public Context getConText() {
         return this;
     }
 }

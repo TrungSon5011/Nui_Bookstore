@@ -25,16 +25,14 @@ public class OrderInformationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-
         SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(pagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(pager);
     }
-    private class SectionPagerAdapter extends FragmentPagerAdapter {
 
+    private class SectionPagerAdapter extends FragmentPagerAdapter {
 
         public SectionPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
@@ -43,9 +41,9 @@ public class OrderInformationActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
-                    return new  OrderProcessingFragment();
+                    return new OrderProcessingFragment();
                 case 1:
                     return new ShippingFragment();
                 case 2:
@@ -60,8 +58,8 @@ public class OrderInformationActivity extends AppCompatActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position){
-            switch (position){
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
                 case 0:
                     return getResources().getText(R.string.processing_tab);
                 case 1:

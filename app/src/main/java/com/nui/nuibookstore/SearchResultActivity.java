@@ -20,23 +20,27 @@ public class SearchResultActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = (ActionBar) getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         handleIntent(getIntent());
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handleIntent(intent);
     }
+
     private void handleIntent(Intent intent) {
-        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            query = "%"+ query + "%";
+            query = "%" + query + "%";
             System.out.println("check");
-            new FindByName(this,query).execute();
+            new FindByName(this, query).execute();
         }
     }
-    public Context getContext(){
+
+    public Context getContext() {
         return this;
     }
 }

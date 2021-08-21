@@ -1,6 +1,5 @@
 package com.nui.nuibookstore.model;
 
-import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.List;

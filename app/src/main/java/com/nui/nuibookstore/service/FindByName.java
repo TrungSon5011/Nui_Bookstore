@@ -18,17 +18,19 @@ import com.nui.nuibookstore.model.Book;
 
 import java.util.List;
 
-public class FindByName extends AsyncTask<Void,Void, List<Book>> {
+public class FindByName extends AsyncTask<Void, Void, List<Book>> {
     private SearchResultActivity searchResultActivity;
     private String name;
     public static List<Book> bookListFindByName;
-    public FindByName(SearchResultActivity searchResultActivity,String name){
+
+    public FindByName(SearchResultActivity searchResultActivity, String name) {
         this.searchResultActivity = searchResultActivity;
         this.name = name;
     }
+
     @Override
-    protected void onPreExecute(){
-        Toast.makeText(searchResultActivity.getContext(),"Please wait...",Toast.LENGTH_SHORT).show();
+    protected void onPreExecute() {
+        Toast.makeText(searchResultActivity.getContext(), "Please wait...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -38,37 +40,27 @@ public class FindByName extends AsyncTask<Void,Void, List<Book>> {
         List<Book> books = bookDao.findByName(name);
         return books;
     }
+
     @Override
-    protected void onPostExecute(List<Book> bookList){
+    protected void onPostExecute(List<Book> bookList) {
         RecyclerView recyclerView = (RecyclerView) searchResultActivity.findViewById(R.id.result_recycler);
         bookListFindByName = bookList;
-        if (bookList.size() == 0){
-            Toast.makeText(searchResultActivity.getContext(),"Found 0 book",Toast.LENGTH_SHORT).show();
-        }else {
-//            int [] imageResourceIds = new int[bookList.size()];
-//            String [] names = new String[bookList.size()];
-//            String [] authors = new String[bookList.size()];
-//            double [] price = new double[bookList.size()];
-//            for (int i = 0; i < bookList.size() ; i++) {
-//                imageResourceIds[i] = bookList.get(i).getPictureResourceId();
-//                names[i] = bookList.get(i).getName();
-//                authors[i] = bookList.get(i).getAuthor();
-//                price[i] = bookList.get(i).getPrice();
-//            }
-            CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList,searchResultActivity);
+        if (bookList.size() == 0) {
+            Toast.makeText(searchResultActivity.getContext(), "Found 0 book", Toast.LENGTH_SHORT).show();
+        } else {
+            CaptionedImagesAdapter captionedImagesAdapter = new CaptionedImagesAdapter(bookList, searchResultActivity);
             recyclerView.setAdapter(captionedImagesAdapter);
-            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);
             captionedImagesAdapter.setListener(new CaptionedImagesAdapter.Listener() {
                 @Override
                 public void onClick(int position) {
                     Intent intent = new Intent(searchResultActivity, BookDetailActivity.class);
-                    intent.putExtra(BookDetailActivity.BOOK_POSITION,position);
-                    intent.putExtra(BookDetailActivity.CHECK,2);
+                    intent.putExtra(BookDetailActivity.BOOK_POSITION, position);
+                    intent.putExtra(BookDetailActivity.CHECK, 2);
                     searchResultActivity.startActivity(intent);
                 }
             });
         }
-
     }
 }

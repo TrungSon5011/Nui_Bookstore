@@ -46,21 +46,22 @@ public class BookDetailActivity extends AppCompatActivity {
         int position = (Integer) getIntent().getExtras().get(BOOK_POSITION);
         int check = (int) getIntent().getExtras().get(CHECK);
         List<Book> bookList;
-        if (check == 1){
+        if (check == 1) {
             bookList = GetAllBook.getAllBook;
             book = bookList.get(position);
-        }else if(check == 3){
+        } else if (check == 3) {
             book = bookCartList.get(position).getBook();
-        }else if(check == 2){
+        } else if (check == 2) {
             bookList = FindByName.bookListFindByName;
             book = bookList.get(position);
-        }else if (check == 4){
+        } else if (check == 4) {
             bookList = GetBooksByGenre.getBooksByGenre;
             book = bookList.get(position);
         }
         setView(book);
     }
-    private void setView(Book book){
+
+    private void setView(Book book) {
         TextView name = (TextView) findViewById(R.id.detail_book_name);
         name.setText(book.getName());
         ImageView imageView = (ImageView) findViewById(R.id.book_detail_image);
@@ -68,7 +69,6 @@ public class BookDetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(storageReference)
                 .into(imageView);
-//        imageView.setImageResource(book.getPictureResourceId());
         imageView.setContentDescription(book.getName());
         TextView author = (TextView) findViewById(R.id.detail_book_author);
         author.setText(book.getAuthor());
@@ -77,39 +77,37 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView description = (TextView) findViewById(R.id.detail_book_description);
         description.setText(book.getDescription());
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void addToCart(View view){
-        if (bookCartList.size()== 0){
-            bookCartList.add(new BookCart(book,1));
-        }else {
+    public void addToCart(View view) {
+        if (bookCartList.size() == 0) {
+            bookCartList.add(new BookCart(book, 1));
+        } else {
             boolean check = false;
-            for (int i = 0; i < bookCartList.size();i++){
-                if(bookCartList.get(i).getBook().equals(book)) {
-                    bookCartList.get(i).setQuantity(bookCartList.get(i).getQuantity()+1);
+            for (int i = 0; i < bookCartList.size(); i++) {
+                if (bookCartList.get(i).getBook().equals(book)) {
+                    bookCartList.get(i).setQuantity(bookCartList.get(i).getQuantity() + 1);
                     check = true;
                     break;
                 }
             }
-            if (!check){
-                bookCartList.add(new BookCart(book,1));
+            if (!check) {
+                bookCartList.add(new BookCart(book, 1));
             }
         }
-
-        Toast.makeText(this,"Have added to cart!",Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "Have added to cart!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detail_activity,menu);
-
+        getMenuInflater().inflate(R.menu.menu_detail_activity, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.cart){
-            Intent intent = new Intent(this,CartActivity.class);
+        if (item.getItemId() == R.id.cart) {
+            Intent intent = new Intent(this, CartActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -15,13 +15,12 @@ import com.nui.nuibookstore.model.OrderInformation;
 import org.w3c.dom.Text;
 
 public class OrderInformationDetailActivity extends AppCompatActivity {
-    public  static final String ORDER_INFORMATION  = "OrderInformation";
+    public static final String ORDER_INFORMATION = "OrderInformation";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_information_detail);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -38,10 +37,9 @@ public class OrderInformationDetailActivity extends AppCompatActivity {
         cityTextView.setText(orderInformation.getCity());
         stateTextView.setText(R.string.processing_tab);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.order_recycler);
-        CaptionBookOrderAdapter captionBookOrderAdapter = new CaptionBookOrderAdapter(orderInformation.getBookCarts(),this);
+        CaptionBookOrderAdapter captionBookOrderAdapter = new CaptionBookOrderAdapter(orderInformation.getBookCarts(), this);
         recyclerView.setAdapter(captionBookOrderAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-
     }
 }
